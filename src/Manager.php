@@ -1,13 +1,15 @@
 <?php namespace Square1\Wordpressed;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Cache\CacheManager as CacheManager;
+use \Illuminate\Filesystem\Filesystem as Filesystem;
 
 class Manager
 {
     /**
-     * Default database connection params
+     * @var Default database connection params
      */
-    static protected $default = [
+    protected $config = [
         'driver'    => 'mysql',
         'host'      => 'localhost',
         'database'  => 'database',
@@ -20,16 +22,25 @@ class Manager
     ];
 
     /**
+     * @var Illuminate\Database\Capsule\Manager
+     */
+    private $capsule;
+
+    /**
+     * @var int Cache timeout
+     */
+    private $ttl;
+
+    /**
      * Connect to the Wordpress database
      * 
-     * @param array $params
+     * @param array $config
      */
-    public static function connect(array $params = [])
+    public function __construct(array $config = [])
     {
-        $capsule = new Capsule;
-        $capsule->addConnection(array_merge(static::$default, $params));
-        $capsule->setAsGlobal();
-        $capsule->bootEloquent();
+        $this->capsule = new Capsule;
+        $this->capsule->addConnection(array_merge($this->config, $config));
+        $this->capsule->bootEloquent();
     }
 
     /**
@@ -37,8 +48,23 @@ class Manager
      * 
      * @return array
      */
-    public static function getQueryLog()
+    public function getQueryLog()
     {
-        return Capsule::connection()->getQueryLog();
+        return $this->capsule->getConnection()->getQueryLog();
+    }
+
+    /**
+     * Enable cache
+     * @todo Need to finished this section off!!
+     */
+    public function cache()
+    {
+        $container = $this->capsule->getContainer();
+        $container->offsetGet('config')->offsetSet('cache.driver', 'file');
+        $container->offsetGet('config')->offsetSet('cache.path', __DIR__ . '/cache');
+        $container->offsetGet('config')->offsetSet('cache.connection', null);
+        $container['files'] = new Filesystem();
+        $cacheManager = new CacheManager($container);
+        $this->capsule->setCacheManager($cacheManager);
     }
 }
