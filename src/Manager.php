@@ -27,11 +27,6 @@ class Manager
     private $capsule;
 
     /**
-     * @var int Cache timeout
-     */
-    private $ttl;
-
-    /**
      * Connect to the Wordpress database
      * 
      * @param array $config
