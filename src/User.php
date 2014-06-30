@@ -44,4 +44,20 @@ class User extends Eloquent
     {
         return $this->hasMany('Square1\Wordpressed\Post', 'post_author');
     }
+
+    /**
+     * Get users with a given (nice)name
+     *
+     * @param object       $query The query object
+     * @param array|string $name  The (nice)name(s) of the author(s)
+     *
+     * @return object The query object
+     */
+    public function scopeName($query, $name)
+    {
+        if (!is_array($name)) {
+            return $query->where('user_nicename', $name);
+        }
+        return $query->whereIn('user_nicename', $name);
+    }
 }

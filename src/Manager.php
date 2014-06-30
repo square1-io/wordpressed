@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-class Wordpressed
+class Manager
 {
     /**
      * Default database connection params

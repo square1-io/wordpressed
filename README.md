@@ -18,46 +18,71 @@ Via Composer
 ## Example Usage
 
 ``` php
-Wordpressed::connect(
+use \Square1\Wordpressed\Manager;
+use \Square1\Wordpressed\Post;
+use \Square1\Wordpressed\Category;
+use \Square1\Wordpressed\User;
+
+//Connect to DB
+Manager::connect(
     'host'      => '127.0.0.1',
     'database'  => 'your_db_name',
     'username'  => 'your_username',
     'password'  => 'some_secure_password',
 );
 
+//Get Query Log
+print_r(Manager::getQueryLog());
+
+//Get post by id
+$post = Post::find(12345);
+echo $post->post_name;
+
+//Get posts by ids
 $posts = Post::id([12345, 54321])->get();
 foreach ($posts as $post) {
     echo $post->post_name;
 }
 
-$post = Post::with('author', 'attachments', 'thumbnail', 'categories', 'tags')->find(8271);
-print_r($post);
-
-$posts = Post::slug(this-is-a-post-title')->get();
+//Get post by slug
+$posts = Post::slug('this-is-a-post-title')->get();
 foreach ($posts as $post) {
     echo $post->post_name;
 }
 
+//Get posts by slugs
 $posts = Post::slug(['this-is-a-post-title', 'another-post-title'])->get();
 foreach ($posts as $post) {
     echo $post->post_name;
 }
 
-$posts = Post::status('publish')->take(10)->get();
+//Load all relationships
+$post = Post::with('author', 'attachments', 'thumbnail', 'categories', 'tags')->find(12345);
+print_r($post);
+
+//Load a selection of posts
+$posts = Post::status('publish')->skip(10)->take(10)->get();
 print_r($posts->toArray());
 
+//Load all categories
 $category = Category::get();
 print_r($category->toArray());
 
+//Load categories by slug name
 $category = Category::slug(['sport', 'golf'])->get();
 print_r($category->toArray());
 
+//Load user by id
 $author = User::find(123);
 print_r($author->toArray());
 
-$posts = User::find(24)->posts()->status('publish')->first();
-print_r($posts->toArray());
+//Load user by name
+$users = User::name(['john', 'mary'])->get();
+print_r($users->toArray());
 
+//Load posts by user
+$posts = User::find(123)->posts()->status('publish')->first();
+print_r($posts->toArray());
 ```
 
 ## Testing
