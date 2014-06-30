@@ -57,7 +57,8 @@ foreach ($posts as $post) {
 }
 
 //Load all relationships
-$post = Post::with('author', 'attachments', 'thumbnail', 'categories', 'tags')->find(12345);
+$post = Post::with('author', 'attachments', 'thumbnail', 'categories', 'tags')
+    ->find(12345);
 print_r($post);
 
 //Load a selection of posts
