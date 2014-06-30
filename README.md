@@ -19,6 +19,8 @@ Via Composer
 ## Example Usage
 
 ``` php
+require 'vendor/autoload.php';
+
 use \Square1\Wordpressed\Manager;
 use \Square1\Wordpressed\Post;
 use \Square1\Wordpressed\Category;
