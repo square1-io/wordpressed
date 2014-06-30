@@ -1,6 +1,6 @@
 # Wordpressed
 
-Have a look at the (https://github.com/square1-io/wordpressed#example-usage)[example usage] to figure out what to do! More to come...
+Have a look at the [example usage](https://github.com/square1-io/wordpressed#example-usage) to figure out what to do! More to come...
 
 ## Install
 
