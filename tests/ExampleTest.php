@@ -1,6 +1,4 @@
-<?php
-
-namespace Square1\Wordpressed\Test;
+<?php namespace Square1\Wordpressed\Test;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {

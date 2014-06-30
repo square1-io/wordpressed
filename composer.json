@@ -1,11 +1,11 @@
 {
     "name": "square1/wordpressed",
-    "description": "Wordpress ORM",
+    "description": "WordPress ORM",
     "keywords": [
-        "Wordpress",
-        "ORM"
+        "wordpress",
+        "orm"
     ],
-    "homepage": "https://github.com/square1-io/Wordpress",
+    "homepage": "https://github.com/square1-io/wordpressed",
     "license": "MIT",
     "authors": [
         {
@@ -13,26 +13,25 @@
             "email": "ciaran@square1.io",
             "homepage": "http://www.square1.io",
             "role": "Developer"
-        },
-        {
-            "name": "Paul Conroy",
-            "email": "paul@square1.io",
-            "homepage": "http://www.square1.io",
-            "role": "Developer"
         }
     ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/database": "4.2.*"
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
-        "phpunit/phpunit": "4.1.*"
+        "phpunit/phpunit": "4.1.*",
+        "mockery/mockery": "dev-master@dev"
     },
     "autoload": {
         "psr-4": {
-            "Square1\\Wordpressed": "src"
+            "Square1\\Wordpressed\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Square1\\Wordpressed\\Test": "tests"
+            "Square1\\Wordpressed\\Test\\": "tests"
         }
     }
 }

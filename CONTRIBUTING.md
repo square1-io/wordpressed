@@ -1,7 +1,5 @@
 # Contributing
 
-Contributions are **welcome** and will be fully **credited**.
-
 We accept contributions via Pull Requests on [Github](https://github.com/square1-io/wordpressed).
 
 
@@ -25,7 +23,8 @@ We accept contributions via Pull Requests on [Github](https://github.com/square1
 ## Running Tests
 
 ``` bash
-$ phpunit
+$ vendor/bin/phpunit --coverage-text
+$ vendor/bin/phpcs --standard=psr2 src/
 ```
 
 
