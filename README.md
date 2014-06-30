@@ -24,6 +24,7 @@ require 'vendor/autoload.php';
 use \Square1\Wordpressed\Manager;
 use \Square1\Wordpressed\Post;
 use \Square1\Wordpressed\Category;
+use \Square1\Wordpressed\Tag;
 use \Square1\Wordpressed\User;
 
 //Connect to DB
@@ -71,6 +72,18 @@ foreach ($posts as $post) {
     echo $post->post_name;
 }
 
+//Get posts by category slug
+$posts = Post::category(['sport', 'rugby'])->get();
+foreach ($posts as $post) {
+    echo $post->post_name;
+}
+
+//Get posts by tag slug
+$posts = Post::tag(['sport', 'rugby'])->get();
+foreach ($posts as $post) {
+    echo $post->post_name;
+}
+
 //Get posts by slugs
 $posts = Post::slug(['this-is-a-post-title', 'another-post-title'])->get();
 foreach ($posts as $post) {
@@ -93,6 +106,14 @@ print_r($category->toArray());
 //Load categories by slug name
 $category = Category::slug(['sport', 'golf'])->get();
 print_r($category->toArray());
+
+//Load all tags
+$tag = Tag::get();
+print_r($tag->toArray());
+
+//Load tags by slug name
+$tag = Tag::slug(['sport', 'golf'])->get();
+print_r($tag->toArray());
 
 //Load user by id
 $author = User::find(123);
