@@ -23,19 +23,37 @@ use \Square1\Wordpressed\Category;
 use \Square1\Wordpressed\User;
 
 //Connect to DB
-Manager::connect(
+$wordpressed = new Manager([
     'host'      => '127.0.0.1',
     'database'  => 'your_db_name',
     'username'  => 'your_username',
     'password'  => 'some_secure_password',
-);
+]);
+
+//Enable file cache
+$wordpressed->cache([
+    'driver'     => 'file',
+    'path'       => '/tmp/wordpressed',
+    'connection' => null
+]);
+
+//Enable apc cache
+$wordpressed->cache([
+    'driver' => 'apc'
+]);
 
 //Get Query Log
-print_r(Manager::getQueryLog());
+print_r($wordpressed->getQueryLog());
 
 //Get post by id
 $post = Post::find(12345);
 echo $post->post_name;
+
+//Get and cache post by id with meta
+$posts = Post::with(
+    array('meta' => function ($q) {
+        $q->remember(1);
+    }))->remember(1)->find(1234);
 
 //Get posts by ids
 $posts = Post::id([12345, 54321])->get();
