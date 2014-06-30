@@ -55,15 +55,26 @@ class Manager
 
     /**
      * Enable cache
-     * @todo Need to finished this section off!!
+     *
+     * @param array $config The cache config
      */
-    public function cache()
+    public function cache($config)
     {
         $container = $this->capsule->getContainer();
-        $container->offsetGet('config')->offsetSet('cache.driver', 'file');
-        $container->offsetGet('config')->offsetSet('cache.path', __DIR__ . '/cache');
-        $container->offsetGet('config')->offsetSet('cache.connection', null);
-        $container['files'] = new Filesystem();
+
+        if ($config['driver'] == 'file') {
+            $container->offsetGet('config')
+                ->offsetSet('cache.driver', 'file');
+            $container->offsetGet('config')
+                ->offsetSet('cache.path', $config['path']);
+            $container->offsetGet('config')
+                ->offsetSet('cache.connection', $config['connection']);
+            $container['files'] = new Filesystem();
+
+        } elseif ($config['driver'] == 'apc') {
+            $container->offsetGet('config')->offsetSet('cache.driver', 'apc');
+        }
+
         $cacheManager = new CacheManager($container);
         $this->capsule->setCacheManager($cacheManager);
     }
