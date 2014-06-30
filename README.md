@@ -1,6 +1,8 @@
 # WordPressed
 
-Have a look at the [example usage](https://github.com/square1-io/wordpressed#example-usage) to figure out what to do! More to come...
+Wordpressed - a simple ActiveRecord implementation for working with WordPress. Built on top of Laravels [Eloquent ORM](http://laravel.com/docs/eloquent).
+
+Have a look at the [example usage](https://github.com/square1-io/wordpressed#example-usage) to figure out how to use it!
 
 ## Install
 
