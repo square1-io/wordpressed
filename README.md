@@ -10,7 +10,7 @@ Via Composer
 ``` json
 {
     "require": {
-        "square1/wordpressed": "~1.0"
+        "square1/wordpressed": "dev-master"
     }
 }
 ```
