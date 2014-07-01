@@ -58,7 +58,11 @@ echo $post->post_name;
 $posts = Post::with(
     array('meta' => function ($q) {
         $q->remember(1);
-    }))->remember(1)->find(1234);
+    }
+))->remember(1)->find(1234);
+foreach ($posts as $post) {
+    echo $post->post_name;
+}
 
 //Cache callback
 $posts = $wordpressed->cache('cache-key', 1, function() {
