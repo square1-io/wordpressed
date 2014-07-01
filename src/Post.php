@@ -170,7 +170,7 @@ class Post extends Eloquent
      */
     public function scopeCategory($query, $slug)
     {
-        return $this->taxonomy($query, 'categories', $slug);
+        return $this->taxonomy($query, 'category', $slug);
     }
 
     /**
