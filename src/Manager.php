@@ -26,6 +26,11 @@ class Manager
      */
     private $capsule;
 
+     /**
+     * @var Illuminate\Database\Capsule\Manager
+     */
+    private $cache;
+
     /**
      * Connect to the Wordpress database
      * 
@@ -49,11 +54,25 @@ class Manager
     }
 
     /**
+     * Cache callback
+     *
+     * @param string  $key      The cache key
+     * @param int     $ttl      The time in minutes
+     * @param Closure $callback The callback query
+     *
+     * @return array
+     */
+    public function cache($key, $ttl, $callback)
+    {
+        return $this->cache->remember($key, $ttl, $callback);
+    }
+
+    /**
      * Enable cache
      *
      * @param array $config The cache config
      */
-    public function cache($config)
+    public function enableCache($config)
     {
         $container = $this->capsule->getContainer();
 
@@ -71,6 +90,7 @@ class Manager
         }
 
         $cacheManager = new CacheManager($container);
+        $this->cache = $cacheManager->driver();
         $this->capsule->setCacheManager($cacheManager);
     }
 }

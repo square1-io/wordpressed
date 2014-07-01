@@ -60,6 +60,14 @@ $posts = Post::with(
         $q->remember(1);
     }))->remember(1)->find(1234);
 
+//Cache callback
+$posts = $wordpressed->cache('cache-key', 1, function() {
+    return Post::status('publish')->take(3)->get();
+});
+foreach ($posts as $post) {
+    echo $post->post_name;
+}
+
 //Get posts by ids
 $posts = Post::id([12345, 54321])->get();
 foreach ($posts as $post) {
