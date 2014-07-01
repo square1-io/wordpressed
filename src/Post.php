@@ -170,7 +170,7 @@ class Post extends Eloquent
      */
     public function scopeCategory($query, $slug)
     {
-        return $this->taxonomy('categories', $slug);
+        return $this->taxonomy($query, 'categories', $slug);
     }
 
     /**
@@ -183,18 +183,19 @@ class Post extends Eloquent
      */
     public function scopeTag($query, $slug)
     {
-        return $this->taxonomy('tag', $slug);
+        return $this->taxonomy($query, 'tag', $slug);
     }
 
     /**
      * Get posts with a given taxonomy
      *
+     * @param object $query The query object
      * @param string $name The taxonomy name
      * @param string $slug The slug name
      * 
      * @return object The query object
      */
-    protected function taxonomy($name, $slug)
+    protected function taxonomy($query, $name, $slug)
     {
         $query->select('posts.*')
         ->leftjoin('term_relationships', 'object_id', '=', 'id')
