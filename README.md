@@ -111,13 +111,17 @@ foreach ($posts as $post) {
 }
 
 //Load all relationships
-$post = Post::with('author', 'attachments', 'thumbnail', 'categories', 'tags')
-    ->find(12345);
+$post = Post::with('author', 'attachments', 'thumbnail', 'categories',
+    'comments', 'tags')->find(12345);
 print_r($post);
 
 //Load a selection of posts
 $posts = Post::status('publish')->skip(10)->take(10)->get();
 print_r($posts->toArray());
+
+//Get page by slug
+$page = Page::slug('about')->first();
+echo $page->post_name;
 
 //Load all categories
 $category = Category::get();

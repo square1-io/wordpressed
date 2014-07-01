@@ -2,12 +2,12 @@
 
 use Square1\Wordpressed\Post as Post;
 
-class Attachment extends Post
+class Page extends Post
 {
     /**
      * @var string The type of WP post
      */
-    protected $postType = 'attachment';
+    protected $postType = 'page';
 
     /**
      * @var array Models to lazy load
