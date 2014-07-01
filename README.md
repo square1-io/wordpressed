@@ -64,8 +64,16 @@ foreach ($posts as $post) {
     echo $post->post_name;
 }
 
-//Cache callback
-$posts = $wordpressed->cache('cache-key', 1, function() {
+//Cache callback with ttl
+$posts = $wordpressed->remember('cache-key', 1, function() {
+    return Post::status('publish')->take(3)->get();
+});
+foreach ($posts as $post) {
+    echo $post->post_name;
+}
+
+//Cache callback forever
+$posts = $wordpressed->rememberForever('cache-key-forever', function() {
     return Post::status('publish')->take(3)->get();
 });
 foreach ($posts as $post) {

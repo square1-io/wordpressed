@@ -62,9 +62,22 @@ class Manager
      *
      * @return array
      */
-    public function cache($key, $ttl, $callback)
+    public function remember($key, $ttl, $callback)
     {
         return $this->cache->remember($key, $ttl, $callback);
+    }
+
+    /**
+     * Cache callback, remember forever
+     *
+     * @param string  $key      The cache key
+     * @param Closure $callback The callback query
+     *
+     * @return array
+     */
+    public function rememberForever($key, $callback)
+    {
+        return $this->cache->rememberForever($key, $callback);
     }
 
     /**
