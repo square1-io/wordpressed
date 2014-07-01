@@ -23,6 +23,7 @@ require 'vendor/autoload.php';
 
 use \Square1\Wordpressed\Manager;
 use \Square1\Wordpressed\Post;
+use \Square1\Wordpressed\Page;
 use \Square1\Wordpressed\Category;
 use \Square1\Wordpressed\Tag;
 use \Square1\Wordpressed\User;
