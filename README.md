@@ -28,7 +28,7 @@ use \Square1\Wordpressed\Tag;
 use \Square1\Wordpressed\User;
 
 //Connect to DB
-$wordpressed = new Manager([
+$wp = new Manager([
     'host'      => '127.0.0.1',
     'database'  => 'your_db_name',
     'username'  => 'your_username',
@@ -36,19 +36,19 @@ $wordpressed = new Manager([
 ]);
 
 //Enable file cache
-$wordpressed->cache([
+$wp->cache([
     'driver'     => 'file',
     'path'       => '/tmp/wordpressed',
     'connection' => null
 ]);
 
 //Enable apc cache
-$wordpressed->cache([
+$wp->cache([
     'driver' => 'apc'
 ]);
 
 //Get Query Log
-print_r($wordpressed->getQueryLog());
+print_r($wp->getQueryLog());
 
 //Get post by id
 $post = Post::find(12345);
@@ -65,7 +65,7 @@ foreach ($posts as $post) {
 }
 
 //Cache callback with ttl
-$posts = $wordpressed->remember('cache-key', 1, function() {
+$posts = $wp->remember('cache-key', 1, function() {
     return Post::status('publish')->take(3)->get();
 });
 foreach ($posts as $post) {
@@ -73,7 +73,7 @@ foreach ($posts as $post) {
 }
 
 //Cache callback forever
-$posts = $wordpressed->rememberForever('cache-key-forever', function() {
+$posts = $wp->rememberForever('cache-key-forever', function() {
     return Post::status('publish')->take(3)->get();
 });
 foreach ($posts as $post) {
