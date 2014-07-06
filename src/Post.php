@@ -40,7 +40,13 @@ class Post extends Eloquent
     public function newQuery($excludeDeleted = true)
     {
         $query = parent::newQuery($excludeDeleted);
-        return $query->orderBy('post_date', 'desc');
+        return $query->where(
+            'post_type',
+            $this->postType
+        )->orderBy(
+            'post_date',
+            'desc'
+        );
     }
 
     /**
