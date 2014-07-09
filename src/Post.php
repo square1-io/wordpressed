@@ -189,7 +189,7 @@ class Post extends Eloquent
      */
     public function scopeTag($query, $slug)
     {
-        return $this->taxonomy($query, 'tag', $slug);
+        return $this->taxonomy($query, 'post_tag', $slug);
     }
 
     /**
