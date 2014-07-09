@@ -1,10 +1,14 @@
 <?php namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Square1\Wordpressed\MetaTrait;
 
 class Comment extends Eloquent
 {
+    /**
+     * Load MetaTrait
+     */
+    use MetaTrait;
+
     /**
      * @var string The DB table name
      */

@@ -1,10 +1,14 @@
 <?php namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Square1\Wordpressed\MetaTrait;
 
 class Post extends Eloquent
 {
+    /**
+     * Load MetaTrait
+     */
+    use MetaTrait;
+
     /**
      * @var string The DB table name
      */
@@ -135,6 +139,21 @@ class Post extends Eloquent
     }
 
     /**
+     * Define formats relationship
+     *
+     * @return object
+     */
+    public function formats()
+    {
+        return $this->belongsToMany(
+            'Square1\Wordpressed\Format',
+            'term_relationships',
+            'object_id',
+            'term_taxonomy_id'
+        )->select('terms.*');
+    }
+
+    /**
      * Get posts with a given slug
      *
      * @param object       $query The query object
@@ -190,6 +209,19 @@ class Post extends Eloquent
     public function scopeTag($query, $slug)
     {
         return $this->taxonomy($query, 'post_tag', $slug);
+    }
+
+    /**
+     * Get posts with a given format
+     *
+     * @param object $query The query object
+     * @param string $slug  The slug name of the format
+     *
+     * @return object The query object
+     */
+    public function scopeFormat($query, $slug)
+    {
+        return $this->taxonomy($query, 'post_format', $slug);
     }
 
     /**

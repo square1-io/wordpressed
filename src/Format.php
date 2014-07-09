@@ -2,10 +2,10 @@
 
 use Square1\Wordpressed\Term as Term;
 
-class Tag extends Term
+class Format extends Term
 {
     /**
-     * Override the default query to do all the tag joins
+     * Override the default query to do all the post format joins
      * 
      * @param boolean $excludeDeleted Include soft deleted columns
      * 
@@ -14,7 +14,7 @@ class Tag extends Term
     public function newQuery($excludeDeleted = true)
     {
         $query = parent::newQuery($excludeDeleted);
-        $query->where('taxonomy', '=', 'post_tag');
+        $query->where('taxonomy', '=', 'post_format');
         return $query;
     }
 }
