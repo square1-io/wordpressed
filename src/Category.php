@@ -7,7 +7,7 @@ class Category extends Term
     /**
      * @var array Models to lazy load
      */
-    protected $with = ['parent'];
+    protected $with = ['parents'];
 
     /**
      * Override the default query to do all the category joins
@@ -28,7 +28,7 @@ class Category extends Term
      *
      * @return 
      */
-    public function parent()
+    public function parents()
     {
         return $this->hasOne(
             '\Square1\Wordpressed\Category',
