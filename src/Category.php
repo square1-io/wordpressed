@@ -5,11 +5,6 @@ use Square1\Wordpressed\Term as Term;
 class Category extends Term
 {
     /**
-     * @var array Models to lazy load
-     */
-    protected $with = ['parent'];
-
-    /**
      * Override the default query to do all the category joins
      * 
      * @param boolean $excludeDeleted Include soft deleted columns
