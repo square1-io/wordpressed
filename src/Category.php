@@ -23,7 +23,7 @@ class Category extends Term
      *
      * @return 
      */
-    public function parent()
+    public function parents()
     {
         return $this->hasOne(
             '\Square1\Wordpressed\Category',
