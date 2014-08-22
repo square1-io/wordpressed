@@ -31,4 +31,18 @@ class Category extends Term
             'parent'
         );
     }
+
+    /**
+     * Return children categories
+     *
+     * @return
+     */
+    public function children()
+    {
+        return $this->hasMany(
+            '\Square1\Wordpressed\Category',
+            'parent',
+            'term_taxonomy_id'
+        );
+    }
 }
