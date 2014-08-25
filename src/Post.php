@@ -235,26 +235,35 @@ class Post extends Eloquent
      */
     protected function taxonomy($query, $name, $slug)
     {
-        $query->select('posts.*')
-        ->leftjoin('term_relationships', 'object_id', '=', 'id')
+        /**
+         * The reasoning behind the pre and post fixing is so that a
+         * category and tag search can be executed at the same time.
+         */
+        $postfix = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
+        $prefix = $query->getQuery()->getConnection()->getTablePrefix();
+
+        $query->select("posts.*")
             ->leftjoin(
-                'term_taxonomy',
-                'term_relationships.term_taxonomy_id',
-                '=',
-                'term_taxonomy.term_taxonomy_id'
-            )
-            ->leftjoin(
-                'terms',
-                'term_taxonomy.term_id',
-                '=',
-                'terms.term_id'
-            )
-            ->where('taxonomy', '=', $name);
+                "term_relationships AS {$prefix}term_relationships{$postfix}",
+                "term_relationships{$postfix}.object_id",
+                "=",
+                "id"
+            )->leftjoin(
+                "term_taxonomy AS {$prefix}term_taxonomy{$postfix}",
+                "term_relationships{$postfix}.term_taxonomy_id",
+                "=",
+                "term_taxonomy{$postfix}.term_taxonomy_id"
+            )->leftjoin(
+                "terms AS {$prefix}terms{$postfix}",
+                "term_taxonomy{$postfix}.term_id",
+                "=",
+                "terms{$postfix}.term_id"
+            )->where("term_taxonomy{$postfix}.taxonomy", "=", $name);
 
         if (!is_array($slug)) {
-            return $query->where('slug', $slug);
+            return $query->where("terms{$postfix}.slug", $slug);
         }
-        return $query->whereIn('slug', $slug);
+        return $query->whereIn("terms{$postfix}.slug", $slug);
     }
 
     /**
