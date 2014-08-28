@@ -38,19 +38,20 @@ class Post extends Eloquent
      * Override the default query to do all the category joins
      * 
      * @param boolean $excludeDeleted Include soft deleted columns
+     * @param boolean $setOrderBy     By default orders by post_date desc
      * 
      * @return object The query object
      */
-    public function newQuery($excludeDeleted = true)
+    public function newQuery($excludeDeleted = true, $setOrderBy = true)
     {
         $query = parent::newQuery($excludeDeleted);
-        return $query->where(
-            'post_type',
-            $this->postType
-        )->orderBy(
-            'post_date',
-            'desc'
-        );
+
+        $query->where('post_type', $this->postType);
+        if ($setOrderBy) {
+            $query->orderBy('post_date', 'desc');
+        }
+
+        return $query;
     }
 
     /**
