@@ -36,27 +36,22 @@ class Post extends Eloquent
 
     /**
      * Override the default query to do all the category joins
-     * 
+     *
      * @param boolean $excludeDeleted Include soft deleted columns
-     * @param boolean $setOrderBy     By default orders by post_date desc
-     * 
+     *
      * @return object The query object
      */
-    public function newQuery($excludeDeleted = true, $setOrderBy = true)
+    public function newQuery($excludeDeleted = true)
     {
         $query = parent::newQuery($excludeDeleted);
 
         $query->where('post_type', $this->postType);
-        if ($setOrderBy) {
-            $query->orderBy('post_date', 'desc');
-        }
-
         return $query;
     }
 
     /**
      * Define post meta relationship
-     * 
+     *
      * @return object
      */
     public function meta()
@@ -159,7 +154,7 @@ class Post extends Eloquent
      *
      * @param object       $query The query object
      * @param array|string $slug  The name(s) of the article(s)
-     * 
+     *
      * @return object The query object
      */
     public function scopeSlug($query, $slug)
@@ -191,7 +186,7 @@ class Post extends Eloquent
      *
      * @param object $query The query object
      * @param string $slug  The slug name of the category
-     * 
+     *
      * @return object The query object
      */
     public function scopeCategory($query, $slug)
@@ -204,7 +199,7 @@ class Post extends Eloquent
      *
      * @param object $query The query object
      * @param string $slug  The slug name of the tag
-     * 
+     *
      * @return object The query object
      */
     public function scopeTag($query, $slug)
@@ -231,7 +226,7 @@ class Post extends Eloquent
      * @param object $query The query object
      * @param string $name The taxonomy name
      * @param string $slug The slug name
-     * 
+     *
      * @return object The query object
      */
     protected function taxonomy($query, $name, $slug)
@@ -240,7 +235,7 @@ class Post extends Eloquent
          * The reasoning behind the pre and post fixing is so that a
          * category and tag search can be executed at the same time.
          */
-        $postfix = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
+        $postfix = substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', 10), 0, 10));
         $prefix = $query->getQuery()->getConnection()->getTablePrefix();
 
         $query->select("posts.*")
@@ -272,7 +267,7 @@ class Post extends Eloquent
      *
      * @param object $query  The query object
      * @param string $status The status of the post
-     * 
+     *
      * @return object The query object
      */
     public function scopeStatus($query, $status = '')
@@ -282,7 +277,7 @@ class Post extends Eloquent
 
     /**
      * Get posts with a given post type
-     * 
+     *
      * @param string $type
      * @return \Corcel\PostBuilder
      */
