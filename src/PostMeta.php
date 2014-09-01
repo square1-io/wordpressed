@@ -22,7 +22,7 @@ class PostMeta extends Eloquent
 
     /**
      * Override the default Collection
-     * 
+     *
      * @param array $models
      *
      * @return \Square1\Wordpressed\MetaCollection
@@ -34,7 +34,7 @@ class PostMeta extends Eloquent
 
     /**
      * Define post relationship
-     * 
+     *
      * @return object
      */
     public function post()

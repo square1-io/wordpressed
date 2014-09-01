@@ -31,7 +31,7 @@ class Comment extends Eloquent
 
     /**
      * Define user meta relationship
-     * 
+     *
      * @return object
      */
     public function meta()

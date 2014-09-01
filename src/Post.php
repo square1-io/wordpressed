@@ -46,6 +46,7 @@ class Post extends Eloquent
         $query = parent::newQuery($excludeDeleted);
 
         $query->where('post_type', $this->postType);
+
         return $query;
     }
 
@@ -162,6 +163,7 @@ class Post extends Eloquent
         if (!is_array($slug)) {
             return $query->where('post_name', $slug);
         }
+
         return $query->whereIn('post_name', $slug);
     }
 
@@ -178,6 +180,7 @@ class Post extends Eloquent
         if (!is_array($id)) {
             return $query->where('ID', $id);
         }
+
         return $query->whereIn('ID', $id);
     }
 
@@ -224,8 +227,8 @@ class Post extends Eloquent
      * Get posts with a given taxonomy
      *
      * @param object $query The query object
-     * @param string $name The taxonomy name
-     * @param string $slug The slug name
+     * @param string $name  The taxonomy name
+     * @param string $slug  The slug name
      *
      * @return object The query object
      */
@@ -259,6 +262,7 @@ class Post extends Eloquent
         if (!is_array($slug)) {
             return $query->where("terms{$postfix}.slug", $slug);
         }
+
         return $query->whereIn("terms{$postfix}.slug", $slug);
     }
 
@@ -278,7 +282,7 @@ class Post extends Eloquent
     /**
      * Get posts with a given post type
      *
-     * @param string $type
+     * @param  string              $type
      * @return \Corcel\PostBuilder
      */
     public function scopeType($query, $type)

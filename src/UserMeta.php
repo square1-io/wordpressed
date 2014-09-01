@@ -22,7 +22,7 @@ class UserMeta extends Eloquent
 
     /**
      * Override the default Collection
-     * 
+     *
      * @param array $models
      *
      * @return \Square1\Wordpressed\UserMetaCollection
@@ -34,7 +34,7 @@ class UserMeta extends Eloquent
 
     /**
      * Define user relationship
-     * 
+     *
      * @return object
      */
     public function user()

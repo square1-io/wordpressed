@@ -31,7 +31,7 @@ class User extends Eloquent
 
     /**
      * Define user meta relationship
-     * 
+     *
      * @return object
      */
     public function meta()
@@ -62,6 +62,7 @@ class User extends Eloquent
         if (!is_array($name)) {
             return $query->where('user_nicename', $name);
         }
+
         return $query->whereIn('user_nicename', $name);
     }
 }

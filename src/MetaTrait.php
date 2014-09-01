@@ -4,7 +4,7 @@ trait MetaTrait
 {
     /**
      * Return meta value from parent object via a magic method
-     * 
+     *
      * @param string $key
      *
      * @return string
@@ -14,6 +14,7 @@ trait MetaTrait
         if (!isset($this->$key)) {
             return $this->meta->$key;
         }
+
         return parent::__get($key);
     }
 }

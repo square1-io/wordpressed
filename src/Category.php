@@ -6,22 +6,23 @@ class Category extends Term
 {
     /**
      * Override the default query to do all the category joins
-     * 
+     *
      * @param boolean $excludeDeleted Include soft deleted columns
-     * 
+     *
      * @return object The query object
      */
     public function newQuery($excludeDeleted = true)
     {
         $query = parent::newQuery($excludeDeleted);
         $query->where('taxonomy', '=', 'category');
+
         return $query;
     }
 
     /**
      * Return parent category
      *
-     * @return 
+     * @return
      */
     public function parents()
     {

@@ -33,19 +33,19 @@ class Manager
 
     /**
      * Connect to the Wordpress database
-     * 
+     *
      * @param array $config
      */
     public function __construct(array $config = [])
     {
-        $this->capsule = new Capsule;
+        $this->capsule = new Capsule();
         $this->capsule->addConnection(array_merge($this->config, $config));
         $this->capsule->bootEloquent();
     }
 
     /**
      * Get the query log
-     * 
+     *
      * @return array
      */
     public function getQueryLog()

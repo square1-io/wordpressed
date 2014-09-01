@@ -6,7 +6,7 @@ class MetaCollection extends Collection
 {
     /**
      * Return value for the given key
-     * 
+     *
      * @param string $key
      *
      * @return string

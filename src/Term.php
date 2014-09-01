@@ -21,15 +21,16 @@ class Term extends Eloquent
 
     /**
      * Override the default query to do all the category joins
-     * 
+     *
      * @param boolean $excludeDeleted Include soft deleted columns
-     * 
+     *
      * @return object The query object
      */
     public function newQuery($excludeDeleted = true)
     {
         $query = parent::newQuery($excludeDeleted);
         $query->join('terms', 'term_taxonomy.term_id', '=', 'terms.term_id');
+
         return $query;
     }
 
@@ -38,7 +39,7 @@ class Term extends Eloquent
      *
      * @param object       $query The query object
      * @param array|string $slug  The name(s) of the slug(s)
-     * 
+     *
      * @return object The query object
      */
     public function scopeSlug($query, $slug)
@@ -46,6 +47,7 @@ class Term extends Eloquent
         if (!is_array($slug)) {
             return $query->where('slug', $slug);
         }
+
         return $query->whereIn('slug', $slug);
     }
 }
