@@ -237,7 +237,7 @@ class Post extends Eloquent
          * The reasoning behind the pre and post fixing is so that a
          * category and tag search can be executed at the same time.
          */
-        $postfix = substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', 10), 0, 10));
+        $postfix = substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', 10)), 0, 10);
         $prefix = $query->getQuery()->getConnection()->getTablePrefix();
 
         $query->select("posts.*")
