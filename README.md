@@ -11,7 +11,7 @@ Via Composer
 ``` json
 {
     "require": {
-        "square1/wordpressed": "dev-master"
+        "square1/wordpressed": "0.1.*"
     }
 }
 ```
@@ -36,18 +36,6 @@ $wp = new Manager([
     'password'  => 'some_secure_password',
 ]);
 
-//Enable file cache
-$wp->cache([
-    'driver'     => 'file',
-    'path'       => '/tmp/wordpressed',
-    'connection' => null
-]);
-
-//Enable apc cache
-$wp->cache([
-    'driver' => 'apc'
-]);
-
 //Get Query Log
 print_r($wp->getQueryLog());
 
@@ -55,28 +43,8 @@ print_r($wp->getQueryLog());
 $post = Post::find(12345);
 echo $post->post_name;
 
-//Get and cache post by id with meta
-$posts = Post::with(
-    array('meta' => function ($q) {
-        $q->remember(1);
-    }
-))->remember(1)->find(1234);
-foreach ($posts as $post) {
-    echo $post->post_name;
-}
-
-//Cache callback with ttl
-$posts = $wp->remember('cache-key', 1, function() {
-    return Post::status('publish')->take(3)->get();
-});
-foreach ($posts as $post) {
-    echo $post->post_name;
-}
-
-//Cache callback forever
-$posts = $wp->rememberForever('cache-key-forever', function() {
-    return Post::status('publish')->take(3)->get();
-});
+//Get post by id with meta
+$posts = Post::with('meta')->find(1234);
 foreach ($posts as $post) {
     echo $post->post_name;
 }

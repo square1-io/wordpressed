@@ -44,7 +44,6 @@ class Post extends Eloquent
     public function newQuery($excludeDeleted = true)
     {
         $query = parent::newQuery($excludeDeleted);
-
         $query->where('post_type', $this->postType);
 
         return $query;

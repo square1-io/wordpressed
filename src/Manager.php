@@ -1,8 +1,6 @@
 <?php namespace Square1\Wordpressed;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use Illuminate\Cache\CacheManager as CacheManager;
-use \Illuminate\Filesystem\Filesystem as Filesystem;
 
 class Manager
 {
@@ -26,11 +24,6 @@ class Manager
      */
     private $capsule;
 
-     /**
-     * @var Illuminate\Database\Capsule\Manager
-     */
-    private $cache;
-
     /**
      * Connect to the Wordpress database
      *
@@ -51,59 +44,5 @@ class Manager
     public function getQueryLog()
     {
         return $this->capsule->getConnection()->getQueryLog();
-    }
-
-    /**
-     * Cache callback
-     *
-     * @param string  $key      The cache key
-     * @param int     $ttl      The time in minutes
-     * @param Closure $callback The callback query
-     *
-     * @return array
-     */
-    public function remember($key, $ttl, $callback)
-    {
-        return $this->cache->remember($key, $ttl, $callback);
-    }
-
-    /**
-     * Cache callback, remember forever
-     *
-     * @param string  $key      The cache key
-     * @param Closure $callback The callback query
-     *
-     * @return array
-     */
-    public function rememberForever($key, $callback)
-    {
-        return $this->cache->rememberForever($key, $callback);
-    }
-
-    /**
-     * Enable cache
-     *
-     * @param array $config The cache config
-     */
-    public function enableCache($config)
-    {
-        $container = $this->capsule->getContainer();
-
-        if ($config['driver'] == 'file') {
-            $container->offsetGet('config')
-                ->offsetSet('cache.driver', 'file');
-            $container->offsetGet('config')
-                ->offsetSet('cache.path', $config['path']);
-            $container->offsetGet('config')
-                ->offsetSet('cache.connection', $config['connection']);
-            $container['files'] = new Filesystem();
-
-        } elseif ($config['driver'] == 'apc') {
-            $container->offsetGet('config')->offsetSet('cache.driver', 'apc');
-        }
-
-        $cacheManager = new CacheManager($container);
-        $this->cache = $cacheManager->driver();
-        $this->capsule->setCacheManager($cacheManager);
     }
 }
