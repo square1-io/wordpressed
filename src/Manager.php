@@ -37,12 +37,22 @@ class Manager
     }
 
     /**
+     * Get the capsule
+     *
+     * @return Illuminate\Database\Capsule\Manager
+     */
+    public function getCapsule()
+    {
+        return $this->capsule;
+    }
+
+    /**
      * Get the query log
      *
      * @return array
      */
     public function getQueryLog()
     {
-        return $this->capsule->getConnection()->getQueryLog();
+        return $this->getCapsule()->getConnection()->getQueryLog();
     }
 }
