@@ -260,7 +260,7 @@ class Post extends Eloquent
                 "term_taxonomy{$postfix}.taxonomy",
                 "=",
                 $name
-            )->groupBy('posts.id');
+            )->distinct();
 
         if (!is_array($slug)) {
             return $query->where("terms{$postfix}.slug", $slug);
