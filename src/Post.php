@@ -76,7 +76,8 @@ class Post extends Eloquent
      */
     public function attachments()
     {
-        return $this->hasMany('Square1\Wordpressed\Attachment', 'post_parent');
+        return $this->hasMany('Square1\Wordpressed\Attachment', 'post_parent')
+            ->orderBy('menu_order');
     }
 
     /**
