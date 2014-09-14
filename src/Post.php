@@ -76,7 +76,8 @@ class Post extends Eloquent
      */
     public function attachments()
     {
-        return $this->hasMany('Square1\Wordpressed\Attachment', 'post_parent');
+        return $this->hasMany('Square1\Wordpressed\Attachment', 'post_parent')
+            ->orderBy('menu_order');
     }
 
     /**
@@ -256,7 +257,11 @@ class Post extends Eloquent
                 "term_taxonomy{$postfix}.term_id",
                 "=",
                 "terms{$postfix}.term_id"
-            )->where("term_taxonomy{$postfix}.taxonomy", "=", $name);
+            )->where(
+                "term_taxonomy{$postfix}.taxonomy",
+                "=",
+                $name
+            )->distinct();
 
         if (!is_array($slug)) {
             return $query->where("terms{$postfix}.slug", $slug);
