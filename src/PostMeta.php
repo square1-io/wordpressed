@@ -16,6 +16,11 @@ class PostMeta extends Eloquent
     protected $primaryKey = 'meta_id';
 
     /**
+     * @var array Mass-assignable attributes
+     */
+    protected $fillable = ['post_id', 'meta_key', 'meta_value'];
+
+    /**
      * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
