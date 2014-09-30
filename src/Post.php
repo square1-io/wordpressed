@@ -117,7 +117,7 @@ class Post extends Eloquent
             'term_relationships',
             'object_id',
             'term_taxonomy_id'
-        )->select('terms.*');
+        )->select(['terms.*', 'term_taxonomy.*']);
     }
 
     /**
@@ -132,7 +132,7 @@ class Post extends Eloquent
             'term_relationships',
             'object_id',
             'term_taxonomy_id'
-        )->select('terms.*');
+        )->select(['terms.*', 'term_taxonomy.*']);
     }
 
     /**
@@ -147,7 +147,7 @@ class Post extends Eloquent
             'term_relationships',
             'object_id',
             'term_taxonomy_id'
-        )->select('terms.*');
+        )->select(['terms.*', 'term_taxonomy.*']);
     }
 
     /**
