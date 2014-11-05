@@ -132,7 +132,8 @@ class Post extends Eloquent
             'term_relationships',
             'object_id',
             'term_taxonomy_id'
-        )->select(['terms.*', 'term_taxonomy.*']);
+        )->select(['terms.*', 'term_taxonomy.*'])
+        ->orderBy('count', 'desc');
     }
 
     /**
