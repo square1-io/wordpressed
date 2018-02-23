@@ -188,39 +188,54 @@ class Post extends Eloquent
      * Get posts with a given category
      *
      * @param object $query The query object
-     * @param string $slug  The slug name of the category
+     * @param string|array $slug  List of categories
      *
      * @return object The query object
      */
     public function scopeCategory($query, $slug)
     {
-        return $this->taxonomy($query, 'category', $slug);
+        return $query->whereHas('categories', function ($q) use ($slug) {
+            if (is_array($slug)) {
+                $q->whereIn('terms.slug', $slug);
+            }
+            $q->where('terms.slug', $slug);
+        })->distinct('posts.ID');
     }
 
     /**
      * Get posts with a given tag
      *
      * @param object $query The query object
-     * @param string $slug  The slug name of the tag
+     * @param string|array $slug  List of tags
      *
      * @return object The query object
      */
     public function scopeTag($query, $slug)
     {
-        return $this->taxonomy($query, 'post_tag', $slug);
+        return $query->whereHas('tags', function ($q) use ($slug) {
+            if (is_array($slug)) {
+                $q->whereIn('terms.slug', $slug);
+            }
+            $q->where('terms.slug', $slug);
+        })->distinct('posts.ID');
     }
 
     /**
      * Get posts with a given format
      *
      * @param object $query The query object
-     * @param string $slug  The slug name of the format
+     * @param string|array $slug  List of formats
      *
      * @return object The query object
      */
     public function scopeFormat($query, $slug)
     {
-        return $this->taxonomy($query, 'post_format', $slug);
+        return $query->whereHas('formats', function ($q) use ($slug) {
+            if (is_array($slug)) {
+                $q->whereIn('terms.slug', $slug);
+            }
+            $q->where('terms.slug', $slug);
+        })->distinct('posts.ID');
     }
 
     /**
