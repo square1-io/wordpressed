@@ -1,5 +1,7 @@
 # WordPressed
 
+[![Build Status](https://travis-ci.org//square1-io/wordpressed.svg?branch=master)](https://travis-ci.org/square1-io/wordpressed)
+
 Wordpressed - a simple ActiveRecord implementation for working with WordPress. Built on top of Laravels [Eloquent ORM](http://laravel.com/docs/eloquent).
 
 Have a look at the [example usage](https://github.com/square1-io/wordpressed#example-usage) to figure out how to use it!
