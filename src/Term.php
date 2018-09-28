@@ -1,4 +1,6 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
@@ -10,21 +12,21 @@ class Term extends Eloquent
     protected $table = 'term_taxonomy';
 
     /**
-     * @var string Primiary DB key
+     * @var string Primary DB key
      */
     protected $primaryKey = 'term_taxonomy_id';
 
     /**
-     * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
+     * @var bool Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
 
     /**
-     * Override the default query to do all the category joins
+     * Override the default query to do all the category joins.
      *
-     * @param boolean $excludeDeleted Include soft deleted columns
+     * @param bool $excludeDeleted Include soft deleted columns
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function newQuery($excludeDeleted = true)
     {
@@ -35,12 +37,12 @@ class Term extends Eloquent
     }
 
     /**
-     * Get term with given slug(s)
+     * Get term with given slug(s).
      *
-     * @param object       $query The query object
-     * @param array|string $slug  The name(s) of the slug(s)
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param array|string                                                             $slug  The name(s) of the slug(s)
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeSlug($query, $slug)
     {

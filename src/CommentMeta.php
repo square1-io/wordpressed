@@ -1,7 +1,8 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Square1\Wordpressed\MetaCollection as MetaCollection;
 
 class CommentMeta extends Eloquent
 {
@@ -11,21 +12,21 @@ class CommentMeta extends Eloquent
     protected $table = 'commentmeta';
 
     /**
-     * @var string Primiary DB key
+     * @var string Primary DB key
      */
     protected $primaryKey = 'meta_id';
 
     /**
-     * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
+     * @var bool Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
 
     /**
-     * Override the default Collection
+     * Override the default Collection.
      *
      * @param array $models
      *
-     * @return \Square1\Wordpressed\UserMetaCollection
+     * @return \Square1\Wordpressed\MetaCollection
      */
     public function newCollection(array $models = [])
     {
@@ -33,9 +34,9 @@ class CommentMeta extends Eloquent
     }
 
     /**
-     * Define user relationship
+     * Define user relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function comment()
     {

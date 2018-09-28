@@ -1,11 +1,13 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Collection;
 
 class MetaCollection extends Collection
 {
     /**
-     * Return value for the given key
+     * Return value for the given key.
      *
      * @param string $key
      *
@@ -18,5 +20,7 @@ class MetaCollection extends Collection
                 return $item->meta_value;
             }
         }
+
+        return null;
     }
 }
