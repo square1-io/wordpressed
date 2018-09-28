@@ -1,10 +1,12 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Comment extends Eloquent
 {
-    /**
+    /*
      * Load MetaTrait
      */
     use MetaTrait;
@@ -15,7 +17,7 @@ class Comment extends Eloquent
     protected $table = 'comments';
 
     /**
-     * @var string Primiary DB key
+     * @var string Primary DB key
      */
     protected $primaryKey = 'comment_ID';
 
@@ -25,14 +27,14 @@ class Comment extends Eloquent
     protected $with = ['meta'];
 
     /**
-     * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
+     * @var bool Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
 
     /**
-     * Define user meta relationship
+     * Define user meta relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function meta()
     {
@@ -40,9 +42,9 @@ class Comment extends Eloquent
     }
 
     /**
-     * Define post relationship
+     * Define post relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function post()
     {

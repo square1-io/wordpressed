@@ -1,7 +1,8 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Square1\Wordpressed\MetaCollection as MetaCollection;
 
 class PostMeta extends Eloquent
 {
@@ -11,7 +12,7 @@ class PostMeta extends Eloquent
     protected $table = 'postmeta';
 
     /**
-     * @var string Primiary DB key
+     * @var string Primary DB key
      */
     protected $primaryKey = 'meta_id';
 
@@ -21,12 +22,12 @@ class PostMeta extends Eloquent
     protected $fillable = ['post_id', 'meta_key', 'meta_value'];
 
     /**
-     * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
+     * @var bool Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
 
     /**
-     * Override the default Collection
+     * Override the default Collection.
      *
      * @param array $models
      *
@@ -38,9 +39,9 @@ class PostMeta extends Eloquent
     }
 
     /**
-     * Define post relationship
+     * Define post relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function post()
     {

@@ -1,15 +1,15 @@
-<?php namespace Square1\Wordpressed;
+<?php
 
-use Square1\Wordpressed\Term as Term;
+namespace Square1\Wordpressed;
 
 class Category extends Term
 {
     /**
-     * Override the default query to do all the category joins
+     * Override the default query to do all the category joins.
      *
-     * @param boolean $excludeDeleted Include soft deleted columns
+     * @param bool $excludeDeleted Include soft deleted columns
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function newQuery($excludeDeleted = true)
     {
@@ -20,9 +20,9 @@ class Category extends Term
     }
 
     /**
-     * Return parent category
+     * Return parent category.
      *
-     * @return
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function parents()
     {
@@ -34,9 +34,9 @@ class Category extends Term
     }
 
     /**
-     * Return children categories
+     * Return children categories.
      *
-     * @return
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function children()
     {

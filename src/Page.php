@@ -1,6 +1,6 @@
-<?php namespace Square1\Wordpressed;
+<?php
 
-use Square1\Wordpressed\Post as Post;
+namespace Square1\Wordpressed;
 
 class Page extends Post
 {

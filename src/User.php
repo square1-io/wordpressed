@@ -1,10 +1,12 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent
 {
-    /**
+    /*
      * Load MetaTrait
      */
     use MetaTrait;
@@ -15,7 +17,7 @@ class User extends Eloquent
     protected $table = 'users';
 
     /**
-     * @var string Primiary DB key
+     * @var string Primary DB key
      */
     protected $primaryKey = 'ID';
 
@@ -25,14 +27,14 @@ class User extends Eloquent
     protected $with = ['meta'];
 
     /**
-     * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
+     * @var bool Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
 
     /**
-     * Define user meta relationship
+     * Define user meta relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function meta()
     {
@@ -40,9 +42,9 @@ class User extends Eloquent
     }
 
     /**
-     * Define post relationship
+     * Define post relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts()
     {
@@ -50,12 +52,13 @@ class User extends Eloquent
     }
 
     /**
-     * Get users with a given (nice)name
+     * Get users with a given (nice)name.
      *
-     * @param object       $query The query object
-     * @param array|string $name  The (nice)name(s) of the author(s)
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param array|string                                                             $name  The (nice)name(s) of
+     *                                                                                        the author(s)
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeName($query, $name)
     {

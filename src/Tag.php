@@ -1,15 +1,15 @@
-<?php namespace Square1\Wordpressed;
+<?php
 
-use Square1\Wordpressed\Term as Term;
+namespace Square1\Wordpressed;
 
 class Tag extends Term
 {
     /**
-     * Override the default query to do all the tag joins
+     * Override the default query to do all the tag joins.
      *
-     * @param boolean $excludeDeleted Include soft deleted columns
+     * @param bool $excludeDeleted Include soft deleted columns
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder query object
      */
     public function newQuery($excludeDeleted = true)
     {
