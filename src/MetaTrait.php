@@ -1,9 +1,11 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 trait MetaTrait
 {
     /**
-     * Return meta value from parent object via a magic method
+     * Return meta value from parent object via a magic method.
      *
      * @param string $key
      *

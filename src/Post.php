@@ -1,10 +1,12 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Post extends Eloquent
 {
-    /**
+    /*
      * Load MetaTrait
      */
     use MetaTrait;
@@ -15,7 +17,7 @@ class Post extends Eloquent
     protected $table = 'posts';
 
     /**
-     * @var string Primiary DB key
+     * @var string Primary DB key
      */
     protected $primaryKey = 'ID';
 
@@ -30,16 +32,16 @@ class Post extends Eloquent
     protected $postType = 'post';
 
     /**
-     * @var boolean Disable 'created_at' and 'updated_at' timestamp columns
+     * @var bool Disable 'created_at' and 'updated_at' timestamp columns
      */
     public $timestamps = false;
 
     /**
-     * Override the default query to do all the category joins
+     * Override the default query to do all the category joins.
      *
-     * @param boolean $excludeDeleted Include soft deleted columns
+     * @param bool $excludeDeleted Include soft deleted columns
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function newQuery($excludeDeleted = true)
     {
@@ -50,9 +52,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define post meta relationship
+     * Define post meta relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function meta()
     {
@@ -60,9 +62,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define author relationship
+     * Define author relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function author()
     {
@@ -70,9 +72,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define image relationship
+     * Define image relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function attachments()
     {
@@ -81,9 +83,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define image relationship
+     * Define image relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function comments()
     {
@@ -91,9 +93,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Get thumbnail attachment
+     * Get thumbnail attachment.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function thumbnail()
     {
@@ -106,9 +108,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define categories relationship
+     * Define categories relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories()
     {
@@ -121,9 +123,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define tags relationship
+     * Define tags relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function tags()
     {
@@ -136,9 +138,9 @@ class Post extends Eloquent
     }
 
     /**
-     * Define formats relationship
+     * Define formats relationship.
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function formats()
     {
@@ -151,7 +153,7 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given slug
+     * Get posts with a given slug.
      *
      * @param object       $query The query object
      * @param array|string $slug  The name(s) of the article(s)
@@ -168,12 +170,12 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts within an array of ID's
+     * Get posts within an array of ID's.
      *
-     * @param object $query The query object
-     * @param string $ids   The list of post ids
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param string|array                                                             $id    The list of post ids
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeId($query, $id)
     {
@@ -185,12 +187,12 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given category
+     * Get posts with a given category.
      *
-     * @param object $query The query object
-     * @param string $slug  The slug name of the category
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param string                                                                   $slug  The slug of the category
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeCategory($query, $slug)
     {
@@ -198,12 +200,12 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given tag
+     * Get posts with a given tag.
      *
-     * @param object $query The query object
-     * @param string $slug  The slug name of the tag
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param string                                                                   $slug  The slug name of the tag
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeTag($query, $slug)
     {
@@ -211,12 +213,12 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given format
+     * Get posts with a given format.
      *
-     * @param object $query The query object
-     * @param string $slug  The slug name of the format
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param string                                                                   $slug  The slug of the format
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeFormat($query, $slug)
     {
@@ -224,13 +226,13 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given taxonomy
+     * Get posts with a given taxonomy.
      *
-     * @param object $query The query object
-     * @param string $name  The taxonomy name
-     * @param string $slug  The slug name
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query The query object
+     * @param string                                                                   $name  The taxonomy name
+     * @param string                                                                   $slug  The slug name
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     protected function taxonomy($query, $name, $slug)
     {
@@ -241,25 +243,25 @@ class Post extends Eloquent
         $postfix = substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', 10)), 0, 10);
         $prefix = $query->getQuery()->getConnection()->getTablePrefix();
 
-        $query->select("posts.*")
+        $query->select('posts.*')
             ->leftjoin(
                 "term_relationships AS {$prefix}term_relationships{$postfix}",
                 "term_relationships{$postfix}.object_id",
-                "=",
-                "id"
+                '=',
+                'id'
             )->leftjoin(
                 "term_taxonomy AS {$prefix}term_taxonomy{$postfix}",
                 "term_relationships{$postfix}.term_taxonomy_id",
-                "=",
+                '=',
                 "term_taxonomy{$postfix}.term_taxonomy_id"
             )->leftjoin(
                 "terms AS {$prefix}terms{$postfix}",
                 "term_taxonomy{$postfix}.term_id",
-                "=",
+                '=',
                 "terms{$postfix}.term_id"
             )->where(
                 "term_taxonomy{$postfix}.taxonomy",
-                "=",
+                '=',
                 $name
             )->distinct();
 
@@ -271,12 +273,12 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given status
+     * Get posts with a given status.
      *
-     * @param object $query  The query object
-     * @param string $status The status of the post
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query  The query object
+     * @param string                                                                   $status The status of the post
      *
-     * @return object The query object
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder The query object
      */
     public function scopeStatus($query, $status = '')
     {
@@ -284,10 +286,12 @@ class Post extends Eloquent
     }
 
     /**
-     * Get posts with a given post type
+     * Get posts with a given post type.
      *
-     * @param  string              $type
-     * @return \Corcel\PostBuilder
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
+     * @param string                                                                   $type
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
      */
     public function scopeType($query, $type)
     {

@@ -1,31 +1,33 @@
-<?php namespace Square1\Wordpressed;
+<?php
+
+namespace Square1\Wordpressed;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Manager
 {
     /**
-     * @var Default database connection params
+     * @var array Default database connection params
      */
     protected $config = [
-        'driver'    => 'mysql',
-        'host'      => 'localhost',
-        'database'  => 'database',
-        'username'  => 'root',
-        'password'  => '',
-        'charset'   => 'utf8',
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'database' => 'database',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
-        'prefix'    => 'wp_',
-        'options'   => [],
+        'prefix' => 'wp_',
+        'options' => [],
     ];
 
     /**
-     * @var Illuminate\Database\Capsule\Manager
+     * @var \Illuminate\Database\Capsule\Manager
      */
     private $capsule;
 
     /**
-     * Connect to the Wordpress database
+     * Connect to the Wordpress database.
      *
      * @param array $config
      */
@@ -37,7 +39,7 @@ class Manager
     }
 
     /**
-     * Get the query log
+     * Get the query log.
      *
      * @return array
      */
