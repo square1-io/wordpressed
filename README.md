@@ -16,6 +16,16 @@ Via Composer
 }
 ```
 
+Version for Laravel 5
+
+``` json
+{
+    "require": {
+        "square1/wordpressed": "^0.1.8"
+    }
+}
+```
+
 ## Example Usage
 
 ``` php
